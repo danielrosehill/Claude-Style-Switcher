@@ -1,7 +1,7 @@
 {
   "name": "style-switcher",
   "version": "0.1.0",
-  "description": "Manage and switch between named Claude output styles — drop-in tone/format/response-shape presets stored in a user-level data directory and applied to ~/.claude/output-styles/.",
+  "description": "Modular style snippets for Claude Code — small tonal fragments organised by category (verbosity, initiative, tone, formatting, hedging…) that layer together into a managed block inside ~/.claude/CLAUDE.md. Within a category at most one snippet is active; across categories they compose.",
   "author": {
     "name": "Daniel Rosehill",
     "url": "https://github.com/danielrosehill"

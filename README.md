@@ -1,46 +1,72 @@
 # Claude Style Switcher — Claude Code Plugin
 
-Manage and switch between named output **styles** for Claude Code — subtle tone, register, and voice presets you define yourself. Not modes, not personas: small adjustments to how Claude phrases things (formality, terseness, hedging, vocabulary, emoji-or-not) without changing what it can do.
+A modular, layerable system for shaping Claude Code's tone and voice.
 
-Styles live in a user-level data directory and are applied to `~/.claude/output-styles/` (or a CLAUDE.md fragment, or any custom path) on demand. The library starts empty — you write every style.
+Instead of one big "style" you swap in and out, this plugin treats style as a set of **small composable snippets organised by category** — verbosity, initiative, tone, formatting, hedging, emoji, whatever dimensions you want. Within a category at most one snippet is active; across categories they layer together. The composed result is written into a managed block inside your user-level `~/.claude/CLAUDE.md`.
+
+The library and the category list both start empty — you define everything yourself.
+
+## Why snippets, not styles
+
+A snippet is one or two sentences nudging Claude in a single dimension:
+
+- *verbosity / ultra-curt* — "Default to one-line answers."
+- *initiative / free-spirit* — "Assume approval; don't pause to confirm."
+- *hedging / no-hedge* — "State things flatly. Drop 'might', 'I think'."
+
+You mix the ones you want, switch one out without disturbing the others, and the rest of your CLAUDE.md stays untouched.
 
 ## Skills
 
 **Setup**
-- `onboard` — first-run setup: pick where the active style should be written, create the data directory
+- `onboard` — pick the apply target (default: `~/.claude/CLAUDE.md`), create the data directory
 
 **Library**
-- `add-style` — create a new named style
-- `edit-style` — modify an existing one
-- `delete-style` — remove one
-- `list-styles` — show every style with the active one marked
+- `add-snippet` — create a new snippet in a category (creates the category if new)
+- `edit-snippet` — modify an existing snippet
+- `delete-snippet` — remove one
+- `list-snippets` — list everything grouped by category, with active ones marked
 
-**Switching**
-- `apply-style <name>` — write the chosen style to the configured target and mark it active
-- `current-style` — show what's currently applied
-- `revert-style` — restore from the most recent backup
+**Composition**
+- `apply-layers` — pick at most one snippet per category, compose them into a managed block in the target file
+- `current-layers` — show what's currently active
+- `clear-layers` — strip the managed block; library is untouched
 
 ## Data location
 
 ```
 ${CLAUDE_USER_DATA:-${XDG_DATA_HOME:-$HOME/.local/share}/claude-plugins}/style-switcher/
-├── config.json     # apply_target, active_style
-├── styles/         # one .md file per named style
-├── state/          # reserved
-└── backups/        # pre-apply snapshots of the target file
+├── config.json
+├── snippets/
+│   ├── <category>/<snippet>.md
+│   └── ...
+├── state/
+└── backups/         # pre-apply snapshots of the target file
 ```
 
 Override the data root by setting `$CLAUDE_USER_DATA` before launching Claude Code.
 
-## Apply targets
+## Apply target
 
-Picked during `onboard`:
+Default is `claude-md-fragment` writing to `~/.claude/CLAUDE.md` — a delimited managed block:
 
-| Type | Where the active style lands | How it takes effect |
-|------|------------------------------|---------------------|
-| `output-style` | `~/.claude/output-styles/<name>.md` | `/output-style <name>` |
-| `claude-md-fragment` | A delimited block inside `~/.claude/CLAUDE.md` | Next Claude Code session |
-| `custom-path` | Any file you point at | Whatever consumes that file |
+```markdown
+<!-- style-switcher:start -->
+## Style: verbosity — ultra-curt
+…body…
+
+## Style: initiative — free-spirit
+…body…
+<!-- style-switcher:end -->
+```
+
+`apply-layers` rewrites only what's between the markers; everything else in your CLAUDE.md is left alone. `clear-layers` removes the block entirely.
+
+You can point the target at any other file via `onboard` (`custom-path` mode) — same delimited-block protocol.
+
+## Composition rule
+
+Within a category, at most one snippet is active. Across categories, they all layer.
 
 ## License
 

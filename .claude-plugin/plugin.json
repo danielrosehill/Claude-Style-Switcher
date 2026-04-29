@@ -1,0 +1,12 @@
+{
+  "name": "style-switcher",
+  "version": "0.1.0",
+  "description": "Manage and switch between named Claude output styles — drop-in tone/format/response-shape presets stored in a user-level data directory and applied to ~/.claude/output-styles/.",
+  "author": {
+    "name": "Daniel Rosehill",
+    "url": "https://github.com/danielrosehill"
+  },
+  "repository": "https://github.com/danielrosehill/Claude-Style-Switcher",
+  "license": "MIT",
+  "keywords": ["claude", "claude-code", "output-style", "prompt", "tone", "style"]
+}

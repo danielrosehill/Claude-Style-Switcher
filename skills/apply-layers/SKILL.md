@@ -30,8 +30,12 @@ description: Compose the active snippet from each chosen category into a single 
    ```
 
 6. **Write.** If the target already contains a `<!-- style-switcher:start -->` … `<!-- style-switcher:end -->` block, replace it in place. Otherwise append the block at the end of the file (preceded by a blank line).
-7. **Update `applied_at`** in `config.json` to ISO-8601 now.
-8. **Confirm.** Print the resolved target path, the layered selection (`category — snippet` per line), and remind the user that CLAUDE.md changes take effect on the next Claude Code session.
+7. **Update `applied_at`** in `config.json` to ISO-8601 now. Set `active_recipe` to null (manual layer composition is not a recipe).
+8. **Log.** Append one JSON line to `$DATA_ROOT/state/history.jsonl` (create the directory if needed):
+   ```json
+   {"ts":"<iso>","action":"apply-layers","target":"<path>","layers":[{"category":"...","snippet":"..."}]}
+   ```
+9. **Confirm.** Print the resolved target path, the layered selection (`category — snippet` per line), and remind the user that CLAUDE.md changes take effect on the next Claude Code session. Close with `TO RETURN TO YOUR DEFAULT CLAUDE.MD RUN /GO-AWAY`.
 
 ## Edge cases
 

@@ -1,7 +1,7 @@
 {
   "name": "style-switcher",
-  "version": "0.1.0",
-  "description": "Modular style snippets for Claude Code — small tonal fragments organised by category (verbosity, initiative, tone, formatting, hedging…) that layer together into a managed block inside ~/.claude/CLAUDE.md. Within a category at most one snippet is active; across categories they compose.",
+  "version": "0.2.0",
+  "description": "Modular style snippets and persona recipes for Claude Code. Twelve shipped persona recipes (Daredevil, Jaded IT, Reluctant, Chatty, Philosophical, Operational, Dubious, Hyper Creative, Approval Needed, Visionary, Claude FM, Claude Bouncer), each with a banner image and sound effect. Two apply targets: a managed block inside ~/.claude/CLAUDE.md, or repo-sandbox mode that holds the user CLAUDE.md aside and drops the persona into <cwd>/CLAUDE.md for risk-free play.",
   "author": {
     "name": "Daniel Rosehill",
     "url": "https://github.com/danielrosehill"

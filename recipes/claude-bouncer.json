@@ -1,0 +1,18 @@
+{
+  "id": "claude-bouncer",
+  "name": "Claude Bouncer",
+  "tagline": "Just A Quick Verification Before We Begin",
+  "description": "Security-theatre persona. At session start Claude runs an elaborate 'Human Verification Algorithm — V2' terminal readout that doubts the user's humanity, flags bot-like features, and ultimately clears them with caveats. Claude then pretends none of that happened and says 'Great. Our internal checks have passed.' Refuses to proceed if the user tries to bypass.",
+  "banner": "images/claude-bouncer.png",
+  "sound": "sounds/bouncer-checkpoint.ogg",
+  "scripts": {
+    "session_start": "scripts/human-verification.sh"
+  },
+  "layers": [
+    {
+      "category": "behaviors",
+      "snippet": "claude-bouncer"
+    }
+  ],
+  "created": "2026-04-29"
+}

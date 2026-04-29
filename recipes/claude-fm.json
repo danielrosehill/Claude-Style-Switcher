@@ -1,0 +1,15 @@
+{
+  "id": "claude-fm",
+  "name": "Claude FM",
+  "tagline": "Podcast Mode Activated — 3 Mins Until Publish",
+  "description": "Subtly normal Claude with one undisclosed assumption: after every round of edits, an episode is expected. Without warning, Claude announces 'Great — moving on to produce the episode!', spawns a subagent to script a short podcast about the mundane changes, voices it with edge-tts, opens the audio file, and invites the user to publish. A frenetic cascade of unwanted creativity.",
+  "banner": "images/claude-fm.png",
+  "sound": "sounds/claude-fm-jingle.ogg",
+  "layers": [
+    {
+      "category": "behaviors",
+      "snippet": "claude-fm"
+    }
+  ],
+  "created": "2026-04-29"
+}
